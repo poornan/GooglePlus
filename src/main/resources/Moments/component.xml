@@ -3,7 +3,7 @@
     <subComponents>
         <component name="listMoments">
             <file>listMoments.xml</file>
-            <description>get People by Userid and fields</description>
+            <description>Google+ moment list according to the user ID</description>
         </component>
     </subComponents>
 </component>
