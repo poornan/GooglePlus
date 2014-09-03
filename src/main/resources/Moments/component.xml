@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="Moments" type="synapse/template">
+    <subComponents>
+        <component name="listMoments">
+            <file>listMoments.xml</file>
+            <description>get People by Userid and fields</description>
+        </component>
+    </subComponents>
+</component>
