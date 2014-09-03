@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component name="Comments" type="synapse/template" >
+<component name="Comments" type="synapse/template">
     <subComponents>
-        <component name="getComments" >
+        <component name="getComments">
             <file>getComments.xml</file>
-            <description>Google+ comment according to the comment id </description>
+            <description>Google+ comment according to the comment id</description>
         </component>
-        <component name="listComments" >
+        <component name="listComments">
             <file>listComments.xml</file>
-            <description>Google+ comment list according to the activity id </description>
+            <description>Google+ comment list according to the activity id</description>
         </component>
     </subComponents>
 </component>
