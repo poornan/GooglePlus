@@ -29,7 +29,15 @@ tasks app." />
                 <http method="post" uri-template="https://accounts.google.com/o/oauth2/token" />
             </endpoint>
         </call>
+        <filter source="$axis2:HTTP_SC" regex="[2][\d][\d]">
+            <then>
 
+                <property name="response" expression="json-eval($.access_token)" />
+                <header name="Authorization" expression="fn:concat('Bearer ',get-property('response'))"
+                        scope="transport" />
+
+            </then>
+        </filter>
         <!-- Remove response custom header information -->
         <header name="Cache-Control" scope="transport" action="remove" />
         <header name="Expires" scope="transport" action="remove" />
