@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="GooglePlusConfig" type="synapse/template">
+    <subComponents>
+        <component name="getAccessToken">
+            <file>getAccessToken.xml</file>
+            <description>Exchange a refresh token with an access token</description>
+        </component>
+        <component name="init">
+            <file>init.xml</file>
+            <description>Configure google plus connector</description>
+        </component>
+    </subComponents>
+</component>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="getComments" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="commentId" description="Activity id in Google Plus" />
+    <parameter name="fields" description="Required Fields in response if null all the fields will in response" />
+    <sequence>
+        <property name="uri.var.commentId" expression="$func:commentId" />
+        <property name="uri.var.fields" expression="$func:fields" />
+        <!-- Building the URL with the parameters for the API method -->
+        <filter xpath="(not(get-property('uri.var.fields') = '' or (not(string(get-property('uri.var.fields'))))))">
+            <then>
+                <property name="uri.var.apiParameters" expression="fn:concat(get-property('uri.var.apiParameters'),'fields=',get-property('uri.var.fields'),'&amp;')" />
+            </then>
+        </filter>
+        <payloadFactory media-type="xml">
+            <format>
+                <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+                    <soapenv:Header />
+                    <soapenv:Body />
+                </soapenv:Envelope>
+            </format>
+            <args />
+        </payloadFactory>
+        <call>
+            <endpoint>
+                <http method="GET" uri-template="https://www.googleapis.com/plus/v1/comments/{uri.var.commentId}?{uri.var.apiParameters}" />
+            </endpoint>
+        </call>
+        <!-- Remove response custom header information -->
+        <header name="Cache-Control" scope="transport" action="remove" />
+        <header name="Expires" scope="transport" action="remove" />
+        <header name="X-Content-Type-Options" scope="transport" action="remove" />
+    </sequence>
+
+</template>

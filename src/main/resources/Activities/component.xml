@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="Activities" type="synapse/template" >
+    <subComponents> 
+        <component name="getActivities" >
+            <file>getActivities.xml</file>
+            <description>Google Plus Activity according to the activity id </description>
+        </component>
+        <component name="listActivities" >
+            <file>listActivities.xml</file>
+            <description>List all of the activities in the specified collection for a particular user </description>
+        </component>
+        <component name="searchActivities" >
+            <file>searchActivities.xml</file>
+            <description>List all of the activities in the specified collection for a particular user </description>
+        </component>
+
+    </subComponents>
+</component>
