@@ -1,50 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template name="listActivities" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="userId" description="Activity Id in Google plus" />
-    <parameter name="fields" description="Required Fields in response if null all the fields will in response" />
-    <parameter name="maxResults" description="Required Fields in response if null max of 20 results will in response" />
-    <parameter name="pageToken" description="Required Fields in response if null all the fields will in response" />
+    <parameter name="userId" description="User Id in Google+"/>
+    <parameter name="fields"
+               description="Required Fields in response if null all the fields will in response"/>
+    <parameter name="maxResults"
+               description="Required Fields in response if null max of 20 results will in response"/>
+    <parameter name="pageToken"
+               description="Required Fields in response if null all the fields will in response"/>
 
     <sequence>
-        <property name="uri.var.userId" expression="$func:userId" />
-        <property name="uri.var.fields" expression="$func:fields" />
-        <property name="uri.var.maxResults" expression="$func:maxResults" />
-        <property name="uri.var.pageToken" expression="$func:pageToken" />
+        <property name="uri.var.userId" expression="$func:userId"/>
+        <property name="uri.var.fields" expression="$func:fields"/>
+        <property name="uri.var.maxResults" expression="$func:maxResults"/>
+        <property name="uri.var.pageToken" expression="$func:pageToken"/>
         <!-- Building the URL with the parameters for the API method -->
         <filter xpath="(not(get-property('uri.var.fields') = '' or (not(string(get-property('uri.var.fields'))))))">
             <then>
-                <property name="uri.var.apiParameters" expression="fn:concat(get-property('uri.var.apiParameters'),'fields=',get-property('uri.var.fields'),'&amp;')" />
+                <property name="uri.var.apiParameters"
+                          expression="fn:concat(get-property('uri.var.apiParameters'),'fields=',get-property('uri.var.fields'),'&amp;')"/>
             </then>
         </filter>
         <filter xpath="(not(get-property('uri.var.maxResults') = '' or (not(string(get-property('uri.var.maxResults'))))))">
             <then>
-                <property name="uri.var.apiParameters" expression="fn:concat(get-property('uri.var.apiParameters'),'maxResults=',get-property('uri.var.maxResults'),'&amp;')" />
+                <property name="uri.var.apiParameters"
+                          expression="fn:concat(get-property('uri.var.apiParameters'),'maxResults=',get-property('uri.var.maxResults'),'&amp;')"/>
             </then>
         </filter>
         <filter xpath="(not(get-property('uri.var.pageToken') = '' or (not(string(get-property('uri.var.pageToken'))))))">
             <then>
-                <property name="uri.var.apiParameters" expression="fn:concat(get-property('uri.var.apiParameters'),'pageToken=',get-property('uri.var.pageToken'),'&amp;')" />
+                <property name="uri.var.apiParameters"
+                          expression="fn:concat(get-property('uri.var.apiParameters'),'pageToken=',get-property('uri.var.pageToken'),'&amp;')"/>
             </then>
         </filter>
 
         <payloadFactory media-type="xml">
             <format>
                 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
-                    <soapenv:Header />
-                    <soapenv:Body />
+                    <soapenv:Header/>
+                    <soapenv:Body/>
                 </soapenv:Envelope>
             </format>
-            <args />
+            <args/>
         </payloadFactory>
         <call>
             <endpoint>
-                <http method="GET" uri-template="https://www.googleapis.com/plus/v1/people/{uri.var.userId}/activities/public?{uri.var.apiParameters}" />
+                <http method="GET"
+                      uri-template="https://www.googleapis.com/plus/v1/people/{uri.var.userId}/activities/public?{uri.var.apiParameters}"/>
             </endpoint>
         </call>
 
         <!-- Remove response custom header information -->
-        <header name="Cache-Control" scope="transport" action="remove" />
-        <header name="Expires" scope="transport" action="remove" />
-        <header name="X-Content-Type-Options" scope="transport" action="remove" />
+        <header name="Cache-Control" scope="transport" action="remove"/>
+        <header name="Expires" scope="transport" action="remove"/>
+        <header name="X-Content-Type-Options" scope="transport" action="remove"/>
     </sequence>
-    </template>
+</template>

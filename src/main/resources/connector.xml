@@ -5,7 +5,6 @@
         <dependency component="GooglePlusConfig" />
         <dependency component="Activities" />
         <dependency component="Comments" />
-        <dependency component="People" />
         <dependency component="Moments" />
 </component>
     <icon>icon/icon.png</icon>
