@@ -4,6 +4,7 @@ app." />
     <parameter name="clientSecret" description="client secret of the Google
 tasks app." />
     <parameter name="refreshToken" description="refresh token acquired from google oauth." />
+
     <sequence>
         <header name="Content-Type" value="application/x-www-form-urlencoded"
                 scope="transport" />
@@ -22,6 +23,7 @@ tasks app." />
                 <arg expression="$func:clientId" />
                 <arg expression="$func:clientSecret" />
                 <arg expression="$func:refreshToken" />
+
             </args>
         </payloadFactory>
         <call>
@@ -29,19 +31,18 @@ tasks app." />
                 <http method="post" uri-template="https://accounts.google.com/o/oauth2/token" />
             </endpoint>
         </call>
-        <filter source="$axis2:HTTP_SC" regex="[2][\d][\d]">
+
+        <filter source="$axis2:HTTP_SC" regex="[2][0][0]">
             <then>
-
-                <property name="response" expression="json-eval($.access_token)" />
-                <header name="Authorization" expression="fn:concat('Bearer ',get-property('response'))"
+                <log level="full"/>
+                <property name="accessToken" expression="json-eval($.access_token)" />
+                <header name="Authorization" expression="fn:concat('Bearer ',get-property('accessToken'))"
                         scope="transport" />
-
             </then>
         </filter>
         <!-- Remove response custom header information -->
         <header name="Cache-Control" scope="transport" action="remove" />
         <header name="Expires" scope="transport" action="remove" />
         <header name="X-Content-Type-Options" scope="transport" action="remove" />
-        <!-- <property name="accessToken" expression="json-eval($.access_token)" /> -->
     </sequence>
 </template>
