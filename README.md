@@ -22,10 +22,10 @@ STEPS:
 
 2. Copy GooglePlus connector zip file (GooglePlusConnector.zip) to the location "Integration_Test/products/esb/4.8.1/modules/integration/connectors/repository/"
 
-3. Make sure the google tasks test suite is enabled (as given below) and all other test suites are commented in the following file - "{basedir}/src/test/resources/testng.xml"  
+3. Make sure the google plus test suite is enabled (as given below) and all other test suites are commented in the following file - "{basedir}/src/test/resources/testng.xml"
     <test name="GoogleTasks-Connector-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.connector.integration.test.googletasks"/>
+            <package name="org.wso2.carbon.connector"/>
         </packages>
     </test>
 
