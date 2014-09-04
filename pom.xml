@@ -227,7 +227,7 @@
                             <goal>attached</goal>
                         </goals>
                         <configuration>
-                            <finalName>GooglePlus-Connector</finalName>
+                            <finalName>GooglePlusConnector</finalName>
                             <appendAssemblyId>true</appendAssemblyId>
 
                             <filters>
