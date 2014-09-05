@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="listActivities"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="userId"
+                      expression="json-eval($.userId)"
+                      scope="default"
+                      type="STRING"/>
+            <property name="fields"
+                      expression="json-eval($.fields)"
+                      scope="default"
+                      type="STRING"/>
+            <property name="maxResults"
+                      expression="json-eval($.maxResults)"
+                      scope="default"
+                      type="STRING"/>
+            <property name="pageToken"
+                      expression="json-eval($.pageToken)"
+                      scope="default"
+                      type="STRING"/>
+
+            <GooglePlus.getAccessToken>
+                <clientId>531781373311-8neegkg21vu42sm3caiktpm84o18u1sp.apps.googleusercontent.com</clientId>
+                <clientSecret>Masb_-A44P2QFClxRVqGt48M</clientSecret>
+                <refreshToken>1/cfUPWLduig0I7ENg48hGh0v-Eh7EIK3xYoTGVwQDpe0</refreshToken>
+                <grantType>refresh_token</grantType>
+            </GooglePlus.getAccessToken>
+
+            <GooglePlus.listActivities>
+                <userId>{$ctx: userId}</userId >
+                <fields>{$ctx:fields}</fields>
+                <maxResults>{$ctx:maxResults}</maxResults>
+                <pageToken>{$ctx:pageToken}</pageToken>
+            </GooglePlus.listActivities>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>
