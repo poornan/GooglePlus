@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="getActivities"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="activityId"
+                      expression="json-eval($.activityId)"
+                      scope="default"
+                      type="STRING"/>
+            <property name="fields"
+                      expression="json-eval($.fields)"
+                      scope="default"
+                      type="STRING"/>
+            <GooglePlus.getAccessToken>
+                <clientId>531781373311-8neegkg21vu42sm3caiktpm84o18u1sp.apps.googleusercontent.com</clientId>
+                <clientSecret>Masb_-A44P2QFClxRVqGt48M</clientSecret>
+                <refreshToken>1/cfUPWLduig0I7ENg48hGh0v-Eh7EIK3xYoTGVwQDpe0</refreshToken>
+                <grantType>refresh_token</grantType>
+            </GooglePlus.getAccessToken>
+            <GooglePlus.getActivities>
+                <activityId>{$ctx:activityId}</activityId>
+                <fields>{$ctx:fields}</fields>
+            </GooglePlus.getActivities>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>
